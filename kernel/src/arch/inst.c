@@ -7,7 +7,7 @@
 // | Version       : 0.0.0                                                                                             |
 // | License       : GNU General Public License (GPL), version 3.0                                                     |
 // | Date Created  : June 20, 2024                                                                                     |
-// | Date Modified : June 20, 2024                                                                                     |
+// | Date Modified : June 21, 2024                                                                                     |
 // | Description   : Provides inline C functions which expose specialized x86 and x86-64 instructions.                 |
 // +-------------------------------------------------------------------------------------------------------------------+
 // | Copyright (C) 2024 Elijah Creed Fedele                                                                            |
@@ -49,19 +49,52 @@ void _cpuid(uint32_t *eax, uint32_t *ebx, uint32_t *ecx, uint32_t *edx)
     *eax = a; *ebx = b; *ecx = c; *edx = d;
 }
 
+/// @fn      inline uint8_t _inb(uint16_t port)
+/// @brief   C function exposing the x86 IN (read byte from I/O port) instruction.
+///
+/// @details This function exposes the 8-bit form of the x86 IN (read byte from I/O port) instruction. Execution of 
+/// this function reads an unsigned 8-bit value over the I/O bus from the port address specified. Port addresses, in
+/// keeping with x86 I/O conventions, are always 16-bit, regardless of the return operand size.
+/// 
+/// @param   port the I/O port address to read from
+/// @returns the unsigned 8-bit value of the register occupying the specified I/O address
 uint8_t _inb(uint16_t port)
 {
-
+    uint8_t ret;
+    asm volatile ("inb %1, %0" : "=a" (ret) : "Nd" (port));
+    return ret;
 }
 
+/// @fn      inline uint16_t _inw(uint16_t port)
+/// @brief   C function exposing the x86 IN (read word from I/O port) instruction.
+///
+/// @details This function exposes the 16-bit form of the x86 IN (read word from I/O port) instruction. Execution of 
+/// this function reads an unsigned 16-bit value over the I/O bus from the port address specified. Port addresses, in
+/// keeping with x86 I/O conventions, are always 16-bit, regardless of the return operand size.
+/// 
+/// @param   port the I/O port address to read from
+/// @returns the unsigned 16-bit value of the register occupying the specified I/O address
 uint16_t _inw(uint16_t port)
 {
-
+    uint16_t ret;
+    asm volatile ("inw %1, %0" : "=a" (ret) : "Nd" (port));
+    return ret;
 }
 
+/// @fn      inline uint32_t _inl(uint16_t port)
+/// @brief   C function exposing the x86 IN (read doubleword from I/O port) instruction.
+///
+/// @details This function exposes the 32-bit form of the x86 IN (read doubleword from I/O port) instruction. Execution 
+/// of this function reads an unsigned 32-bit value over the I/O bus from the port address specified. Port addresses, in
+/// keeping with x86 I/O conventions, are always 16-bit, regardless of the return operand size.
+/// 
+/// @param   port the I/O port address to read from
+/// @returns the unsigned 32-bit value of the register occupying the specified I/O address
 uint32_t _inl(uint16_t port)
 {
-
+    uint8_t ret;
+    asm volatile ("inl %1, %0" : "=a" (ret) : "Nd" (port));
+    return ret;
 }
 
 /// @fn      inline void _int(uint8_t vec)
