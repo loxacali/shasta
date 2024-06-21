@@ -24,10 +24,10 @@
 // |     <http://www.gnu.org/licenses/>.                                                                               |
 // +-------------------------------------------------------------------------------------------------------------------+
 
-#ifndef INST_H
-#define INST_H
+#ifndef _ARCH_INST_H
+#define _ARCH_INST_H
 
-#include "freestd.h"
+#include "sys/freestd.h"
 
 inline void     _cpuid(uint32_t *eax, uint32_t *ebx, uint32_t *ecx, uint32_t *edx);
 inline uint8_t  _inb  (uint16_t port);
@@ -45,4 +45,4 @@ inline void     _sgdt (void *tab);
 inline void     _sidt (void *tab);
 inline void     _wrmsr(uint32_t msr, uint64_t value);
 
-#endif /* INST_H */
+#endif /* _ARCH_INST_H */

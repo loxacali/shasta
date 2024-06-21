@@ -24,8 +24,8 @@
 // |     <http://www.gnu.org/licenses/>.                                                                               |
 // +-------------------------------------------------------------------------------------------------------------------+
 
-#ifndef FREESTD_H
-#define FREESTD_H
+#ifndef _SYS_FREESTD_H
+#define _SYS_FREESTD_H
 
 #include <float.h>
 #include <iso646.h>
@@ -37,4 +37,4 @@
 #include <stdint.h>
 #include <stdnoreturn.h>
 
-#endif /* FREESTD_H */
+#endif /* _SYS_FREESTD_H */
